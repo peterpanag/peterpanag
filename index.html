@@ -11,12 +11,13 @@
 The average index price from 1980 - 2020 has increased by a factor of 60.5. In
 comparison the per capita income has increased by a factor of 5.05.
 
-<script>
-    let str = "Hello world"
-    console.log(str)
-</script>
 <div id="graph1"></div>
 <script>
+
+    var dataset1 = d3.csv('economic.csv', function (err, data) {
+        console.log(data)
+    })
+
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 30, bottom: 30, left: 60 },
         width = 460 - margin.left - margin.right,
@@ -31,7 +32,66 @@ comparison the per capita income has increased by a factor of 5.05.
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
+    var xScale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
+        yScale = d3.scaleLinear().domain([0, 10000]).range([height, 0]);
 
+    // Title
+    svg.append('text')
+        .attr('x', width / 2 + 100)
+        .attr('y', 100)
+        .attr('text-anchor', 'middle')
+        .style('font-family', 'Helvetica')
+        .style('font-size', 20)
+        .text('Average Index Price Over Time');
+
+    // X label
+    svg.append('text')
+        .attr('x', width / 2 + 100)
+        .attr('y', height - 15 + 150)
+        .attr('text-anchor', 'middle')
+        .style('font-family', 'Helvetica')
+        .style('font-size', 12)
+        .text('Year');
+
+    // Y label
+    svg.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('transform', 'translate(60,' + height + ')rotate(-90)')
+        .style('font-family', 'Helvetica')
+        .style('font-size', 12)
+        .text('Average Index Price');
+
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(xScale));
+
+    svg.append("g")
+        .call(d3.axisLeft(yScale));
+
+    svg.append('g')
+        .selectAll("dot")
+        .data(dataset1)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return xScale(d[0]); })
+        .attr("cy", function (d) { return yScale(d[1]); })
+        .attr("r", 2)
+        .attr("transform", "translate(" + 100 + "," + 100 + ")")
+        .style("fill", "#CC0000");
+
+    var line = d3.line()
+        .x(function (d) { return xScale(d[0]); })
+        .y(function (d) { return yScale(d[1]); })
+        .curve(d3.curveMonotoneX)
+
+    svg.append("path")
+        .datum(dataset1)
+        .attr("class", "line")
+        .attr("transform", "translate(" + 100 + "," + 100 + ")")
+        .attr("d", line)
+        .style("fill", "none")
+        .style("stroke", "#CC0000")
+        .style("stroke-width", "2");
 
 </script>
 
