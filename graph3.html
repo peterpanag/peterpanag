@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
+</h3>
+
+According to census.gov, per capita income is defined as the "mean income
+computed for every man, woman, and child in a
+particular group including those living in group quarters. It is derived by
+dividing the aggregate income of a particular
+group by the total population in that group. This measure is rounded to the
+nearest whole dollar."
+
+<div id="graph3"></div>
+<script>
+
+
+    d3.csv("economic.csv", function (data) {
+        dataset = data.map(function (d) { return [+d["year"], +d["percapitaincome"]]; });
+    });
+
+</script>
+<br><br>
+<a href="index.html"><button>1</button></a> &#8594;
+<a href="graph2.html"><button>2</button></a> &#8594;
+<a href="graph3.html"><button value="Inset Border"
+        style="border-style:inset;">3</button></a>
+<br><br>
+Dataset:
+<a
+    href="https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020">https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020</a>
+
+</html>

@@ -5,17 +5,13 @@
 <h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
 </h3>
 
-<h4>The average salary in the United States has not kept up with the cost of
-    living during this time period.</h4>
+<h4>The average salary in the United States has kept up with oil prices
+    during this time period.</h4>
 
-The average index price from 1980 - 2020 has increased by a factor of 60.5. In
-comparison the per capita income has increased by a factor of 5.05.
+Oil prices have kept up with the growth rate of the average salary at specific
+points in time.
 
-<script>
-    let str = "Hello world"
-    console.log(str)
-</script>
-<div id="graph1"></div>
+<div id="graph2"></div>
 <script>
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 30, bottom: 30, left: 60 },
@@ -23,24 +19,21 @@ comparison the per capita income has increased by a factor of 5.05.
         height = 400 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
-    var svg = d3.select("#graph1")
+    var svg = d3.select("#graph2")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
-
-
-
 </script>
 
 <br><br><br>
 Hover over the line to see the Per Capita Income for the year.
 <br><br>
-<a href="index.html"><button value="Inset Border"
-        style="border-style:inset;">1</button></a> &#8594;
-<a href="graph2.html"><button>2</button></a> &#8594;
+<a href="index.html"><button>1</button></a> &#8594;
+<a href="graph2.html"><button value="Inset Border"
+        style="border-style:inset;">2</button></a> &#8594;
 <a href="graph3.html"><button>3</button></a>
 <br><br>
 Dataset:
