@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v7.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
 <h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
 </h3>
 
@@ -10,17 +10,18 @@
 
 The average index price from 1980 - 2020 has increased by a factor of 60.5. In
 comparison the per capita income has increased by a factor of 5.05.
+
 <div id="graph1"></div>
 <script>
+
     var combined = []
     d3.csv('economic.csv', function (err, data) {
-        console.log(data)
         for (let i = 0; i < 41; i++) {
-            combined.push({ year: +data[i].year, income: +data[i].percapitaincome });
+            combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
         }
     });
-    console.log(combined)
 
+    console.log(combined)
     // set the dimensions and margins of the graph
     var margin = { top: 70, right: 30, bottom: 40, left: 80 },
         width = 1200 - margin.left - margin.right,
@@ -35,13 +36,13 @@ comparison the per capita income has increased by a factor of 5.05.
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    var xscale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        yscale = d3.scaleLinear().domain([0, 70000]).range([height, 0]);
+    var x = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
+        y = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
 
     // Title
     svg.append('text')
         .attr('x', width / 2)
-        .attr('y', 0)
+        .attr('y', 10)
         .attr('text-anchor', 'middle')
         .style('font-family', 'Helvetica')
         .style('font-size', 20)
@@ -50,7 +51,7 @@ comparison the per capita income has increased by a factor of 5.05.
     // X label
     svg.append('text')
         .attr('x', width / 2)
-        .attr('y', 390)
+        .attr('y', 400)
         .attr('text-anchor', 'middle')
         .style('font-family', 'Helvetica')
         .style('font-size', 12)
@@ -66,22 +67,24 @@ comparison the per capita income has increased by a factor of 5.05.
 
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xscale).tickFormat(d3.format("d")));
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
     svg.append("g")
-        .call(d3.axisLeft(yscale));
+        .call(d3.axisLeft(y));
 
-    var firstline = d3.line()
-        .x(function (d) { return xscale(d.year) })
-        .y(function (d) { return yscale(d.income) });
+    const line = d3.line()
+        .x(d => x(d.year))
+        .y(d => y(d.income));
 
     svg.append("path")
         .datum(combined)
         .attr("fill", "none")
-        .attr("class", "line")
-        .attr("d", firstline);
+        .attr("stroke", "#CC0000")
+        .attr("stroke-width", "2")
+        .attr("d", line);
 
 </script>
+
 <br>
 Hover over the line to see the Per Capita Income for the year.
 <br><br>
