@@ -17,7 +17,7 @@ comparison the per capita income has increased by a factor of 5.05.
     var combined = []
     d3.csv('economic.csv', function (err, data) {
         for (let i = 0; i < 41; i++) {
-            combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
+            combined.push({ "year": +data[i].year, "income": +data[i].percapitaincome })
         }
     });
 
@@ -36,13 +36,13 @@ comparison the per capita income has increased by a factor of 5.05.
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    var x = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        y = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
+    var x1 = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
+        y1 = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
 
     // Title
     svg.append('text')
         .attr('x', width / 2)
-        .attr('y', 10)
+        .attr('y', 0)
         .attr('text-anchor', 'middle')
         .style('font-family', 'Helvetica')
         .style('font-size', 20)
@@ -51,7 +51,7 @@ comparison the per capita income has increased by a factor of 5.05.
     // X label
     svg.append('text')
         .attr('x', width / 2)
-        .attr('y', 400)
+        .attr('y', 480)
         .attr('text-anchor', 'middle')
         .style('font-family', 'Helvetica')
         .style('font-size', 12)
@@ -67,14 +67,14 @@ comparison the per capita income has increased by a factor of 5.05.
 
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+        .call(d3.axisBottom(x1).tickFormat(d3.format("d")));
 
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y1));
 
     const line = d3.line()
-        .x(d => x(d.year))
-        .y(d => y(d.income));
+        .x(d => x1(d["year"]))
+        .y(d => y1(d["income"]));
 
     svg.append("path")
         .datum(combined)
