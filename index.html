@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v7.js"></script>
 <h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
 </h3>
 
@@ -16,11 +16,9 @@ comparison the per capita income has increased by a factor of 5.05.
     const dataset = []
     d3.csv('economic.csv', function (err, data) {
         for (let i = 0; i < 41; i++) {
-            dataset.push({ year: +data[i].year, income: +data[i].percapitaincome })
+            dataset.push({ "year": +data[i].year, "income": +data[i].percapitaincome })
         }
     });
-    console.log(dataset)
-    console.log(dataset[1].year)
     // set the dimensions and margins of the graph
     var margin = { top: 70, right: 30, bottom: 40, left: 80 },
         width = 1200 - margin.left - margin.right,
@@ -36,7 +34,7 @@ comparison the per capita income has increased by a factor of 5.05.
             "translate(" + margin.left + "," + margin.top + ")");
 
     const xscale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        yscale = d3.scaleLinear().domain([0, 70000]).range([height, 0]);
+        yscale = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
 
     // Title
     svg.append('text')
@@ -72,8 +70,10 @@ comparison the per capita income has increased by a factor of 5.05.
         .call(d3.axisLeft(yscale));
 
     var firstline = d3.line()
-        .x(function (d) { console.log(xscale(d.year)); console.log(d.year); return xscale(d.year) })
-        .y(function (d) { console.log(yscale(d.income)); console.log(d.income); return yscale(d.income) });
+        .x(function (d) { return xscale(d.year) })
+        .y(function (d) { return yscale(d.income) });
+
+    console.log(dataset)
 
     svg.append("path")
         .datum(dataset)
