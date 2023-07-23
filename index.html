@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v7.js"></script>
 <h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
 </h3>
 
@@ -36,7 +36,7 @@ comparison the per capita income has increased by a factor of 5.05.
             "translate(" + margin.left + "," + margin.top + ")");
 
     var xscale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        yscale = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
+        yscale = d3.scaleLinear().domain([0, 70000]).range([height, 0]);
 
     // Title
     svg.append('text')
@@ -75,8 +75,8 @@ comparison the per capita income has increased by a factor of 5.05.
         .x(function (d) { return xscale(d.year); })
         .y(function (d) { return yscale(d.income); });
 
+    console.log(combined);
 
-    console.log(combined)
     svg.append("path")
         .datum(combined)
         .attr("fill", "none")
