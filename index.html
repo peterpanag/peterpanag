@@ -14,13 +14,13 @@ comparison the per capita income has increased by a factor of 5.05.
 <div id="graph1"></div>
 <script>
 
-    const combined = []
+    const dataset = []
     d3.csv('economic.csv', function (err, data) {
         for (let i = 0; i < 41; i++) {
-            combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
+            dataset.push({ year: +data[i].year, income: +data[i].percapitaincome })
         }
     });
-    console.log(combined)
+    console.log(dataset)
     // set the dimensions and margins of the graph
     var margin = { top: 70, right: 30, bottom: 40, left: 80 },
         width = 1200 - margin.left - margin.right,
@@ -73,10 +73,9 @@ comparison the per capita income has increased by a factor of 5.05.
 
     const line = d3.line()
         .x(function (d) { return xscale(d.year) })
-        .y(function (d) { return yscale(d.income) });
-
+        .y(function (d) { return yscale(d.income) })
     svg.append("path")
-        .datum(combined)
+        .datum(dataset)
         .attr("fill", "none")
         .attr("class", "line")
         .attr("d", line);
