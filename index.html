@@ -20,6 +20,7 @@ comparison the per capita income has increased by a factor of 5.05.
         }
     });
     console.log(dataset)
+    console.log(dataset[1].year)
     // set the dimensions and margins of the graph
     var margin = { top: 70, right: 30, bottom: 40, left: 80 },
         width = 1200 - margin.left - margin.right,
@@ -70,7 +71,7 @@ comparison the per capita income has increased by a factor of 5.05.
     svg.append("g")
         .call(d3.axisLeft(yscale));
 
-    const line = d3.line()
+    var firstline = d3.line()
         .x(function (d) { console.log(xscale(d.year)); console.log(d.year); return xscale(d.year) })
         .y(function (d) { console.log(yscale(d.income)); console.log(d.income); return yscale(d.income) });
 
@@ -78,7 +79,7 @@ comparison the per capita income has increased by a factor of 5.05.
         .datum(dataset)
         .attr("fill", "none")
         .attr("class", "line")
-        .attr("d", line);
+        .attr("d", firstline);
 
 </script>
 <br>
