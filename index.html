@@ -10,8 +10,6 @@
 
 The average index price from 1980 - 2020 has increased by a factor of 60.5. In
 comparison the per capita income has increased by a factor of 5.05.
-
-<div id="graph1"></div>
 <script>
 
     const dataset = []
@@ -36,7 +34,7 @@ comparison the per capita income has increased by a factor of 5.05.
             "translate(" + margin.left + "," + margin.top + ")");
 
     const xscale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        yscale = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
+        yscale = d3.scaleLinear().domain([0, 70000]).range([height, 0]);
 
     // Title
     svg.append('text')
@@ -72,8 +70,9 @@ comparison the per capita income has increased by a factor of 5.05.
         .call(d3.axisLeft(yscale));
 
     const line = d3.line()
-        .x(function (d) { return xscale(d.year) })
-        .y(function (d) { return yscale(d.income) })
+        .x(function (d) { console.log(xscale(d.year)); console.log(d.year); return xscale(d.year) })
+        .y(function (d) { console.log(yscale(d.income)); console.log(d.income); return yscale(d.income) });
+
     svg.append("path")
         .datum(dataset)
         .attr("fill", "none")
@@ -81,7 +80,7 @@ comparison the per capita income has increased by a factor of 5.05.
         .attr("d", line);
 
 </script>
-
+<div id="graph1"></div>
 <br>
 Hover over the line to see the Per Capita Income for the year.
 <br><br>
