@@ -18,7 +18,7 @@ comparison the per capita income has increased by a factor of 5.05.
     d3.csv('economic.csv', function (err, data) {
         console.log(data)
         for (let i = 0; i < 41; i++) {
-            combined.push({ year: +data[i].year, income: +data[i].income })
+            combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
         }
     });
 
@@ -38,7 +38,7 @@ comparison the per capita income has increased by a factor of 5.05.
             "translate(" + margin.left + "," + margin.top + ")");
 
     var xScale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        yScale = d3.scaleLinear().domain([0, 70000]).range([height, 0]);
+        yScale = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
 
     // Title
     svg.append('text')
