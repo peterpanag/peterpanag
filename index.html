@@ -74,17 +74,15 @@ comparison the per capita income has increased by a factor of 5.05.
         .call(d3.axisLeft(yScale));
 
     const line = d3.line()
-        .x(function (d) { return xScale(d.year); })
-        .y(function (d) { return yScale(d.income); });
+        .x(d => xScale(d.year))
+        .y(d => yScale(d.income));
 
     svg.append("path")
         .datum(combined)
-        .attr("class", "line")
-        .attr("transform", "translate(" + 100 + "," + 100 + ")")
-        .attr("d", line)
-        .style("fill", "none")
-        .style("stroke", "#CC0000")
-        .style("stroke-width", "2");
+        .attr("fill", "none")
+        .attr("stroke", "#CC0000")
+        .attr("stroke-width", "2")
+        .attr("d", line);
 
 </script>
 
