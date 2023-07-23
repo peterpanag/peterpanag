@@ -14,9 +14,9 @@ comparison the per capita income has increased by a factor of 5.05.
 <div id="graph1"></div>
 <script>
 
+    var combined = []
     d3.csv('economic.csv', function (err, data) {
         console.log(data)
-        var combined = []
         for (let i = 0; i < 41; i++) {
             combined.push({ year: data[i].year, income: data[i].percapitaincome })
         }
@@ -52,7 +52,7 @@ comparison the per capita income has increased by a factor of 5.05.
     // X label
     svg.append('text')
         .attr('x', width / 2)
-        .attr('y', height - 15 + 150)
+        .attr('y', 380)
         .attr('text-anchor', 'middle')
         .style('font-family', 'Helvetica')
         .style('font-size', 12)
@@ -61,7 +61,7 @@ comparison the per capita income has increased by a factor of 5.05.
     // Y label
     svg.append('text')
         .attr('text-anchor', 'middle')
-        .attr('transform', 'translate(60,' + height + ')rotate(-90)')
+        .attr('transform', 'translate(10,200)rotate(-90)')
         .style('font-family', 'Helvetica')
         .style('font-size', 12)
         .text('Average Index Price');
