@@ -14,13 +14,12 @@ comparison the per capita income has increased by a factor of 5.05.
 <div id="graph1"></div>
 <script>
 
-    var combined = []
+    const combined = []
     d3.csv('economic.csv', function (err, data) {
         for (let i = 0; i < 41; i++) {
             combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
         }
     });
-
     console.log(combined)
     // set the dimensions and margins of the graph
     var margin = { top: 70, right: 30, bottom: 40, left: 80 },
@@ -36,7 +35,7 @@ comparison the per capita income has increased by a factor of 5.05.
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    var xscale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
+    const xscale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
         yscale = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
 
     // Title
@@ -51,7 +50,7 @@ comparison the per capita income has increased by a factor of 5.05.
     // X label
     svg.append('text')
         .attr('x', width / 2)
-        .attr('y', 480)
+        .attr('y', 390)
         .attr('text-anchor', 'middle')
         .style('font-family', 'Helvetica')
         .style('font-size', 12)
@@ -74,10 +73,10 @@ comparison the per capita income has increased by a factor of 5.05.
 
     const line = d3.line()
         .x(function (d) { return xscale(d.year) })
-        .y(function (d) { return xscale(d.income) });
+        .y(function (d) { return yscale(d.income) });
 
     svg.append("path")
-        .datum([combined])
+        .datum(combined)
         .attr("fill", "none")
         .attr("class", "line")
         .attr("d", line);
