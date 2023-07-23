@@ -16,7 +16,6 @@ comparison the per capita income has increased by a factor of 5.05.
 
     var combined = []
     d3.csv('economic.csv', function (err, data) {
-        console.log(data)
         for (let i = 0; i < 41; i++) {
             combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
         }
@@ -24,9 +23,9 @@ comparison the per capita income has increased by a factor of 5.05.
 
     console.log(combined)
     // set the dimensions and margins of the graph
-    var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    var margin = { top: 70, right: 30, bottom: 40, left: 80 },
+        width = 1200 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#graph1")
@@ -37,8 +36,8 @@ comparison the per capita income has increased by a factor of 5.05.
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    var xScale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        yScale = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
+    var x = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
+        y = d3.scaleLinear().domain([0, 65000]).range([height, 0]);
 
     // Title
     svg.append('text')
@@ -68,14 +67,14 @@ comparison the per capita income has increased by a factor of 5.05.
 
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
     svg.append("g")
-        .call(d3.axisLeft(yScale));
+        .call(d3.axisLeft(y));
 
     const line = d3.line()
-        .x(d => xScale(d.year))
-        .y(d => yScale(d.income));
+        .x(d => x(d.year))
+        .y(d => y(d.income));
 
     svg.append("path")
         .datum(combined)
@@ -86,7 +85,7 @@ comparison the per capita income has increased by a factor of 5.05.
 
 </script>
 
-<br><br><br>
+<br>
 Hover over the line to see the Per Capita Income for the year.
 <br><br>
 <a href="index.html"><button value="Inset Border"
