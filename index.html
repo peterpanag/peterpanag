@@ -14,16 +14,12 @@ comparison the per capita income has increased by a factor of 5.05.
 <div id="graph1"></div>
 <script>
 
-    d3.csv('economic.csv', function (err, data) {
-        console.log(data)
-    })
-
-    var data1 = data.map(function (d) {
+    var data1 = d3.csv('economic.csv', data.map(function (d) {
         return {
             year: d.year,
             income: d.percapitaincome
         }
-    });
+    }));
 
     console.log(data1)
 
