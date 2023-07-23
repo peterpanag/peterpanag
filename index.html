@@ -52,7 +52,7 @@ comparison the per capita income has increased by a factor of 5.05.
     // X label
     svg.append('text')
         .attr('x', width / 2)
-        .attr('y', 380)
+        .attr('y', 400)
         .attr('text-anchor', 'middle')
         .style('font-family', 'Helvetica')
         .style('font-size', 12)
@@ -61,7 +61,7 @@ comparison the per capita income has increased by a factor of 5.05.
     // Y label
     svg.append('text')
         .attr('text-anchor', 'middle')
-        .attr('transform', 'translate(10,200)rotate(-90)')
+        .attr('transform', 'translate(0,170)rotate(-90)')
         .style('font-family', 'Helvetica')
         .style('font-size', 12)
         .text('Average Index Price');
@@ -78,15 +78,15 @@ comparison the per capita income has increased by a factor of 5.05.
         .data(combined)
         .enter()
         .append("circle")
-        .attr("cx", function (d) { return xScale(combined.year); })
-        .attr("cy", function (d) { return yScale(combined.income); })
+        .attr("cx", function (d) { return xScale(+combined.year); })
+        .attr("cy", function (d) { return yScale(+combined.income); })
         .attr("r", 2)
         .attr("transform", "translate(" + 100 + "," + 100 + ")")
         .style("fill", "#CC0000");
 
     var line = d3.line()
-        .x(function (d) { return xScale(combined.year); })
-        .y(function (d) { return yScale(combined.income); })
+        .x(function (d) { return xScale(+combined.year); })
+        .y(function (d) { return yScale(+combined.income); })
         .curve(d3.curveMonotoneX)
 
     svg.append("path")
