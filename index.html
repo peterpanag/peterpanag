@@ -16,11 +16,12 @@ comparison the per capita income has increased by a factor of 5.05.
     var combined = [];
     var data;
     d3.csv('economic.csv', function (err, data) {
+        console.log(data)
         for (let i = 0; i < 41; i++) {
             combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
         }
     });
-    console.log(combined)
+    console.log(combined);
     // set the dimensions and margins of the graph
     var margin = { top: 70, right: 30, bottom: 40, left: 80 },
         width = 1200 - margin.left - margin.right,
