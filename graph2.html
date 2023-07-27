@@ -1,41 +1,73 @@
 <!DOCTYPE html>
+<html>
 <meta charset="utf-8">
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
-<h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
-</h3>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<style>
+    .line {
+        fill: none;
+        stroke: green;
+        stroke-width: 3;
+    }
 
-<h4>The average salary in the United States has kept up with oil prices
-    during this time period.</h4>
+    .dot {
+        fill: green;
+        stroke: #fff;
+    }
 
-Oil prices have kept up with the growth rate of the average salary at specific
-points in time.
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 90px;
+        height: 28px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightsteelblue;
+        border: 0px;
+        border-radius: 8px;
+    }
+</style>
 
-<div id="graph2"></div>
-<script>
-    // set the dimensions and margins of the graph
-    var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+<body>
+    <h2>Income & Expense Analysis in the United States from 1980 - 2020
+    </h2>
 
-    // append the svg object to the body of the page
-    var svg = d3.select("#graph2")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-</script>
+    <h3>The average salary in the United States has kept up with oil prices
+        during this time period.</h3>
 
-<br><br><br>
-Hover over the line to see the Per Capita Income for the year.
-<br><br>
-<a href="index.html"><button>1</button></a> &#8594;
-<a href="graph2.html"><button value="Inset Border"
-        style="border-style:inset;">2</button></a> &#8594;
-<a href="graph3.html"><button>3</button></a>
-<br><br>
-Dataset:
-<a
-    href="https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020">https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020</a>
+    Even though its importance has been slowly dwindling in recent years due to
+    the
+    emergence of electric vehicles, oil has been and still remains a critical
+    resource in the everyday life of most Americans. When its price is elevated,
+    Americans
+    directly feel the effects. Due to the transportation of almost every good
+    relying on oil,
+    expensive oil creates an expensive world.
+    <br><br>
+    Oil prices in general have kept up with the growth rate of the average
+    salary.
+    There was a period of elevated prices during the time period from 2006 to
+    2014.
+    Thankfully, the price recovered. From 2014 to 2020, its price fluctuates
+    around
+    $60.00.
+    <br>
+    <h4 style="color: green;">Hover over each datapoint to see the Per Capita
+        Income for the year.
+    </h4>
+
+    <div id="graph2"></div>
+    <script src="graph2script.js"></script>
+
+    <br><br>
+    <a href="index.html"><button>1</button></a> &#8594;
+    <a href="graph2.html"><button value="Inset Border"
+            style="border-style:inset;">2</button></a> &#8594;
+    <a href="graph3.html"><button>3</button></a>
+    <br><br>
+    Dataset:
+    <a
+        href="https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020">https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020</a>
+</body>
+
+</html>

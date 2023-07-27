@@ -1,35 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
 <meta charset="utf-8">
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
-</h3>
+<script src="https://d3js.org/d3.v5.js"></script>
+<style>
+    .line {
+        fill: none;
+        stroke: red;
+        stroke-width: 3;
+    }
 
-According to census.gov, per capita income is defined as the "mean income
-computed for every man, woman, and child in a
-particular group including those living in group quarters. It is derived by
-dividing the aggregate income of a particular
-group by the total population in that group. This measure is rounded to the
-nearest whole dollar."
+    .dot {
+        fill: red;
+        stroke: #fff;
+    }
 
-<div id="graph3"></div>
-<script>
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 90px;
+        height: 28px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightsteelblue;
+        border: 0px;
+        border-radius: 8px;
+    }
+</style>
 
+<body>
+    <h2>Income & Expense Analysis in the United States from 1980 -
+        2020
+    </h2>
 
-    d3.csv("economic.csv", function (data) {
-        dataset = data.map(function (d) { return [+d["year"], +d["percapitaincome"]]; });
-    });
+    <h3>The average salary in the United States has not kept up with the cost of
+        living during this time period.</h3>
 
-</script>
-<br><br>
-<a href="index.html"><button>1</button></a> &#8594;
-<a href="graph2.html"><button>2</button></a> &#8594;
-<a href="graph3.html"><button value="Inset Border"
-        style="border-style:inset;">3</button></a>
-<br><br>
-Dataset:
-<a
-    href="https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020">https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020</a>
+    The most important factor in this analysis is the consumer price index.
+    The Consumer Price Index (CPI) is a measure of the average change over time
+    in the prices paid by urban consumers for a market basket of consumer goods
+    and services.
+    <br><br>
+    The average index price from 1980 - 2020 has increased by a factor of 60.5.
+    In
+    comparison, the per capita income has increased by a factor of 5.05. From
+    2014 and on, the
+    consumer price index began to increase more rapidly. It almost looks like an
+    exponential graph.
+    <br><br>
+    The rate that it is accelerating is unsustainable for the average American.
+    With every year that passes, the average salary loses buying power.
+    If the American salary does not start to increase to keep up with this rate,
+    most of the population will be in poverty and along with it, the complete
+    elimination of the middle class.
+    <br>
+    <h4 style="color: red;">Hover over each datapoint to see the Per Capita
+        Income for the year.
+    </h4>
 
-</html>
+    <div id="graph3"></div>
+    <script src="graph3script.js"></script>
+    <br><br>
+    <a href="index.html"><button>1</button></a> &#8594;
+    <a href="graph2.html"><button>2</button></a> &#8594;
+    <a href="graph3.html"><button value="Inset Border"
+            style="border-style:inset;">3</button></a>
+    <br><br>
+    Dataset:
+    <a
+        href="https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020">https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020</a>
+</body>

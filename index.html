@@ -1,98 +1,47 @@
 <!DOCTYPE html>
+<html lang="en">
 <meta charset="utf-8">
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v7.js"></script>
-<h3>Per Capita Income & Expense Analysis in the United States from 1980 - 2020
-</h3>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<style>
+    .line {
+        fill: none;
+        stroke: black;
+        stroke-width: 3;
+    }
 
-<h4>The average salary in the United States has not kept up with the cost of
-    living during this time period.</h4>
+    .dot {
+        fill: black;
+        stroke: #fff;
+    }
+</style>
 
-The average index price from 1980 - 2020 has increased by a factor of 60.5. In
-comparison the per capita income has increased by a factor of 5.05.
+<body>
+    <h3>Income & Expense Analysis in the United States from 1980 -
+        2020
+    </h3>
 
-<div id="graph1"></div>
-<script>
+    According to census.gov, per capita income is defined as the "mean income
+    computed for every man, woman, and child in a
+    particular group including those living in group quarters. <br>It is derived
+    by
+    dividing the aggregate income of a particular
+    group by the total population in that group. This measure is rounded to the
+    nearest whole dollar."
+    <br><br>
+    It is clear that the average income has grown steadily over time. During
+    this forty year timespan it increased by a factor of 5.05.
+    <div id="index"></div>
+    <script src="indexscript.js"></script>
+    <br><br>
+    <a href="index.html"><button value="Inset Border"
+            style="border-style:inset;">1</button></a> &#8594;
+    <a href="graph2.html"><button>2</button></a> &#8594;
+    <a href="graph3.html"><button>3</button></a>
+    <br><br>
+    Dataset:
+    <a
+        href="https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020">https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020</a>
+</body>
 
-    var combined = []
-    d3.csv('economic.csv', function (err, data) {
-        for (let i = 0; i < 41; i++) {
-            combined.push({ year: +data[i].year, income: +data[i].percapitaincome })
-        }
-    });
-
-    // set the dimensions and margins of the graph
-    var margin = { top: 70, right: 30, bottom: 40, left: 80 },
-        width = 1200 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
-
-    // append the svg object to the body of the page
-    var svg = d3.select("#graph1")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-    var xscale = d3.scaleLinear().domain([1980, 2020]).range([0, width]),
-        yscale = d3.scaleLinear().domain([0, 70000]).range([height, 0]);
-
-    // Title
-    svg.append('text')
-        .attr('x', width / 2)
-        .attr('y', 10)
-        .attr('text-anchor', 'middle')
-        .style('font-family', 'Helvetica')
-        .style('font-size', 20)
-        .text('Average Index Price Over Time');
-
-    // X label
-    svg.append('text')
-        .attr('x', width / 2)
-        .attr('y', 400)
-        .attr('text-anchor', 'middle')
-        .style('font-family', 'Helvetica')
-        .style('font-size', 12)
-        .text('Year');
-
-    // Y label
-    svg.append('text')
-        .attr('text-anchor', 'middle')
-        .attr('transform', 'translate(0,170)rotate(-90)')
-        .style('font-family', 'Helvetica')
-        .style('font-size', 12)
-        .text('Average Index Price');
-
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xscale).tickFormat(d3.format("d")));
-
-    svg.append("g")
-        .call(d3.axisLeft(yscale));
-
-    const line = d3.line()
-        .x(function (d) { return xscale(d.year); })
-        .y(function (d) { return yscale(d.income); });
-
-    console.log(combined)
-    svg.append("path")
-        .datum(combined)
-        .attr("fill", "none")
-        .attr("stroke", "#CC0000")
-        .attr("stroke-width", "2")
-        .attr("d", line);
-
-</script>
-
-<br>
-Hover over the line to see the Per Capita Income for the year.
-<br><br>
-<a href="index.html"><button value="Inset Border"
-        style="border-style:inset;">1</button></a> &#8594;
-<a href="graph2.html"><button>2</button></a> &#8594;
-<a href="graph3.html"><button>3</button></a>
-<br><br>
-Dataset:
-<a
-    href="https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020">https://www.kaggle.com/datasets/pratik453609/economic-data-9-countries-19802020</a>
+</html>
